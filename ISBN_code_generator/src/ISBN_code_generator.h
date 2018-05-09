@@ -37,5 +37,4 @@
  */
 char isbn_crtl_code_generator(char isbn_code_str[], int isbn_code_standard);
 
-
 #endif /* ISBN_CODE_GENERATOR_H_ */
