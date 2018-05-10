@@ -28,12 +28,6 @@ static bool verify_TEN(char* isbn,int result){
 	return (result%ELEVEN == ZERO);
 }
 
-static bool verify_THIRTEEN(char* isbn,int result){
-	for (int i=ZERO;i<strlen(isbn);i++)
-		(i%TWO==ZERO)?(result+=(isbn[i]-FOURTYEIGHT)):(result+=THREE*(isbn[i]-FOURTYEIGHT));
-	return (result%TEN == ZERO);
-}
-
 static bool is_valid_result_TEN(char result){
 	return isdigit(result)||result==X;
 }
@@ -43,16 +37,29 @@ static int get_result_TEN(int sum){
 	return ELEVEN-rest;
 }
 
-static int get_result_THIRTEEN(int sum){
-	int rest = sum%TEN;
-	return TEN-rest;
-}
-
 static int get_sum_TEN(char* isbn){
 	int sum=ZERO;
 	for (int i=ZERO;i<strlen(isbn);i++)
 		sum += (LENGTH_10-i)*(isbn[i]-FOURTYEIGHT);
 	return sum;
+}
+static char isbn_TEN(char* isbn){
+	int sum=get_sum_TEN(isbn);
+	int res = get_result_TEN(sum);
+	char result = (res==LENGTH_10)?X:res+FOURTYEIGHT;
+	assert(verify_TEN(isbn,res)&&is_valid_result_TEN(result));
+	return result;
+}
+
+static bool verify_THIRTEEN(char* isbn,int result){
+	for (int i=ZERO;i<strlen(isbn);i++)
+		(i%TWO==ZERO)?(result+=(isbn[i]-FOURTYEIGHT)):(result+=THREE*(isbn[i]-FOURTYEIGHT));
+	return (result%TEN == ZERO);
+}
+
+static int get_result_THIRTEEN(int sum){
+	int rest = sum%TEN;
+	return TEN-rest;
 }
 
 static int get_sum_THIRTEEN(char* isbn){
@@ -60,14 +67,6 @@ static int get_sum_THIRTEEN(char* isbn){
 	for (int i=ZERO;i<strlen(isbn);i++)
 		(i%TWO==ZERO)?(sum+=(isbn[i]-FOURTYEIGHT)):(sum+=THREE*(isbn[i]-FOURTYEIGHT));
 	return sum;
-}
-
-static char isbn_TEN(char* isbn){
-	int sum=get_sum_TEN(isbn);
-	int res = get_result_TEN(sum);
-	char result = (res==LENGTH_10)?X:res+FOURTYEIGHT;
-	assert(verify_TEN(isbn,res)&&is_valid_result_TEN(result));
-	return result;
 }
 
 static char isbn_THIRTEEN(char* isbn){
