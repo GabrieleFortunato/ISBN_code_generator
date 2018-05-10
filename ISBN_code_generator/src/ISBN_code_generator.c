@@ -38,7 +38,7 @@ static bool is_valid_result_TEN(char result){
 	return isdigit(result)||result==X;
 }
 
-static int get_result_10(int sum){
+static int get_result_TEN(int sum){
 	int rest = sum%ELEVEN;
 	return ELEVEN-rest;
 }
@@ -64,7 +64,7 @@ static int get_sum_THIRTEEN(char* isbn){
 
 static char isbn_TEN(char* isbn){
 	int sum=get_sum_TEN(isbn);
-	int res = get_result_10(sum);
+	int res = get_result_TEN(sum);
 	char result = (res==LENGTH_10)?X:res+FOURTYEIGHT;
 	assert(verify_TEN(isbn,res)&&is_valid_result_TEN(result));
 	return result;
