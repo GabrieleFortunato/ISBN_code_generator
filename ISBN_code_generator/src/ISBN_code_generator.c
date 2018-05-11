@@ -43,6 +43,7 @@ static int get_sum_TEN(char* isbn){
 		sum += (LENGTH_10-i)*(isbn[i]-FOURTYEIGHT);
 	return sum;
 }
+
 static char isbn_TEN(char* isbn){
 	int sum=get_sum_TEN(isbn);
 	int res = get_result_TEN(sum);
