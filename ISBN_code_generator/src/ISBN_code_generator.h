@@ -11,18 +11,19 @@
 #include <assert.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
-#define ZERO        0
-#define ONE         1
-#define TWO         2
-#define THREE       3
-#define TEN         10
-#define LENGTH_10   TEN
-#define ELEVEN      11
-#define LENGTH_13   13
-#define FOURTYEIGHT 48
-#define X           'X'
+#define ZERO              0
+#define ONE               1
+#define TWO				  2
+#define THREE             3
+#define TEN               10
+#define LENGTH_TEN        TEN
+#define ELEVEN            11
+#define LENGTH_THIRTEEN   13
+#define ASCII             48
+#define X                 'X'
 
 /**
  * Calcola il carattere di controllo di un ISBN
