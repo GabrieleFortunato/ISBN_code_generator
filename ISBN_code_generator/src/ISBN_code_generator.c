@@ -7,74 +7,78 @@
 
 #include "ISBN_code_generator.h"
 
-static bool isvalid(char* isbn){
+static const int THREE = 3;
+static const int TWO = 2;
+static const char X = 'X';
+static const int ELEVEN = 11;
+static const int ASCII = 48;
+static const int ZERO = 0;
+static const int TEN = 10;
+static const int STD_10 = 10;
+static const int STD_13 = 13;
+
+static bool is_valid_isbn(char* isbn){
 	bool flag = true;
-	for (int i=ZERO;i<strlen(isbn);i++)
+	for (int i = ZERO; i < strlen(isbn) && flag; i++)
 		flag = isdigit(isbn[i]);
 	return flag;
 }
 
-static bool verify_isbn_thirteen(char* isbn, int sum){
-	int result = (TEN-sum%TEN);
-	for (int i=ZERO;i<strlen(isbn);i++)
-		result += (i%TWO==ZERO)?(isbn[i]-ASCII):THREE*(isbn[i]-ASCII);
-	return result%TEN==ZERO;
-}
-
-static int get_rest_thirteen(int sum){
-	int rest = sum%TEN;
-	rest = (rest==ZERO)?ZERO:TEN-rest;
-	return rest;
-}
-
-static int get_sum_thirteen(char* isbn){
+static int get_sum_10(char* isbn){
 	int sum = ZERO;
-	for (int i=ZERO;i<strlen(isbn);i++)
-		sum += (i%TWO==ZERO)?(isbn[i]-ASCII):THREE*(isbn[i]-ASCII);
+	for (int i = ZERO; i < strlen(isbn); i++)
+		sum += (TEN - i) * (isbn[i] - ASCII);
 	return sum;
 }
 
-static char isbn_thirteen(char* isbn){
-	int sum =  get_sum_thirteen(isbn);
-	int rest = get_rest_thirteen(sum);
-	char result = rest+ASCII;
-	assert(isdigit(result));
-	assert(verify_isbn_thirteen(isbn,sum));
-	return result;
+static int get_res_10(int sum){
+	int rest = sum % ELEVEN;
+	return (rest == ZERO) ? ZERO : ELEVEN - rest;
 }
 
-static int get_sum_ten(char* isbn){
+static bool verify_10(char* isbn, int a){
+	for (int i = ZERO; i < strlen(isbn); i++)
+		a += (TEN - i) * (isbn[i] - ASCII);
+	return (a % ELEVEN) == ZERO;
+}
+
+static char isbn_10(char* isbn){
+	int sum = get_sum_10(isbn);
+	int res = get_res_10(sum);
+	assert(verify_10(isbn,res));
+	return (res == TEN) ? X : res + ASCII;
+}
+
+static int get_sum_13(char* isbn){
 	int sum = ZERO;
-	for (int i=ZERO;i<strlen(isbn);i++)
-		sum += (LENGTH_TEN-i)*(isbn[i]-ASCII);
+	for (int i = ZERO; i < strlen(isbn); i++)
+		sum += (i % TWO == ZERO) ?
+				(isbn[i] - ASCII) : THREE * (isbn[i] - ASCII);
 	return sum;
 }
 
-static int get_rest_ten(int sum){
-	int rest = sum%ELEVEN;
-	rest = (rest==ZERO)?ZERO:ELEVEN-rest;
-	return rest;
+static int get_res_13(int sum){
+	int rest = sum % TEN;
+	return TEN - rest;
 }
 
-static bool verify_isbn_ten(char* isbn, int sum){
-	int result = ELEVEN-sum%ELEVEN;
-	for (int i=ZERO;i<strlen(isbn);i++)
-		result += (LENGTH_TEN-i)*(isbn[i]-ASCII);
-	return result%ELEVEN==ZERO;
+static bool verify_13(char* isbn, int a){
+	for (int i = ZERO; i < strlen(isbn); i++)
+		a += (i % TWO == ZERO) ?
+				(isbn[i] - ASCII) : THREE * (isbn[i] - ASCII);
+	return (a % TEN) == ZERO;
 }
 
-static char isbn_ten(char* isbn){
-	int sum = get_sum_ten(isbn);
-	int rest = get_rest_ten(sum);
-	char result = rest==TEN?X:rest+ASCII;
-	assert(isdigit(result)||result==X);
-	assert(verify_isbn_ten(isbn,sum));
-	return result;
+static char isbn_13(char* isbn){
+	int sum = get_sum_13(isbn);
+	int res = get_res_13(sum);
+	assert(verify_13(isbn,res));
+	return res+ASCII;
 }
 
 char isbn_crtl_code_generator(char isbn_code_str[], int isbn_code_standard){
-	assert(isbn_code_standard==LENGTH_TEN||isbn_code_standard==LENGTH_THIRTEEN);
-	assert(strlen(isbn_code_str)==isbn_code_standard-ONE);
-	assert(isvalid(isbn_code_str));
-	return (isbn_code_standard==LENGTH_TEN)?isbn_ten(isbn_code_str):isbn_thirteen(isbn_code_str);
+	assert(isbn_code_standard==STD_10||isbn_code_standard==STD_13);
+	assert(is_valid_isbn(isbn_code_str));
+	return (isbn_code_standard==STD_10) ? isbn_10(isbn_code_str) : isbn_13(isbn_code_str);
 }
+
