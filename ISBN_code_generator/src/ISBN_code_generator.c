@@ -77,8 +77,8 @@ static char isbn_13(char* isbn){
 }
 
 char isbn_crtl_code_generator(char isbn_code_str[], int isbn_code_standard){
-	assert(isbn_code_standard==STD_10||isbn_code_standard==STD_13);
+	assert(isbn_code_standard == STD_10 || isbn_code_standard == STD_13);
 	assert(is_valid_isbn(isbn_code_str));
-	return (isbn_code_standard==STD_10) ? isbn_10(isbn_code_str) : isbn_13(isbn_code_str);
+	return (isbn_code_standard == STD_10) ? isbn_10(isbn_code_str) : isbn_13(isbn_code_str);
 }
 
