@@ -14,7 +14,7 @@
 #include <string.h>
 
 /**
- * Calcola il carattere di controllo di un ISBN
+ * Calcola il carattere di controllo di un codice ISBN
  * @pre isbn_code_standard assume valore 10 o 13
  * @pre isbn_code_str ha lunghezza pari a isbn_code_standard-1
  * @pre isbn_code_str contiene solo caratteri decimali
