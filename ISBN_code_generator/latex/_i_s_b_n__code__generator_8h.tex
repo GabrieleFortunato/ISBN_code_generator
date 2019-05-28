@@ -1,40 +1,43 @@
-\hypertarget{_i_s_b_n__code__generator_8h}{}\section{src/\+I\+S\+B\+N\+\_\+code\+\_\+generator.h File Reference}
-\label{_i_s_b_n__code__generator_8h}\index{src/\+I\+S\+B\+N\+\_\+code\+\_\+generator.\+h@{src/\+I\+S\+B\+N\+\_\+code\+\_\+generator.\+h}}
-{\ttfamily \#include $<$assert.\+h$>$}\newline
-{\ttfamily \#include $<$ctype.\+h$>$}\newline
-{\ttfamily \#include $<$stdbool.\+h$>$}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
+\hypertarget{_i_s_b_n__code__generator_8h}{\section{src/\-I\-S\-B\-N\-\_\-code\-\_\-generator.h File Reference}
+\label{_i_s_b_n__code__generator_8h}\index{src/\-I\-S\-B\-N\-\_\-code\-\_\-generator.\-h@{src/\-I\-S\-B\-N\-\_\-code\-\_\-generator.\-h}}
+}
+{\ttfamily \#include $<$assert.\-h$>$}\\*
+{\ttfamily \#include $<$ctype.\-h$>$}\\*
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-char \hyperlink{_i_s_b_n__code__generator_8h_a1c0a2563da29f5a803bfe336e7aceab5}{isbn\+\_\+crtl\+\_\+code\+\_\+generator} (char isbn\+\_\+code\+\_\+str\mbox{[}$\,$\mbox{]}, int isbn\+\_\+code\+\_\+standard)
+char \hyperlink{_i_s_b_n__code__generator_8h_a1c0a2563da29f5a803bfe336e7aceab5}{isbn\-\_\-crtl\-\_\-code\-\_\-generator} (char isbn\-\_\-code\-\_\-str\mbox{[}$\,$\mbox{]}, int isbn\-\_\-code\-\_\-standard)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{_i_s_b_n__code__generator_8h_a1c0a2563da29f5a803bfe336e7aceab5}\label{_i_s_b_n__code__generator_8h_a1c0a2563da29f5a803bfe336e7aceab5}} 
-\index{I\+S\+B\+N\+\_\+code\+\_\+generator.\+h@{I\+S\+B\+N\+\_\+code\+\_\+generator.\+h}!isbn\+\_\+crtl\+\_\+code\+\_\+generator@{isbn\+\_\+crtl\+\_\+code\+\_\+generator}}
-\index{isbn\+\_\+crtl\+\_\+code\+\_\+generator@{isbn\+\_\+crtl\+\_\+code\+\_\+generator}!I\+S\+B\+N\+\_\+code\+\_\+generator.\+h@{I\+S\+B\+N\+\_\+code\+\_\+generator.\+h}}
-\subsubsection{\texorpdfstring{isbn\+\_\+crtl\+\_\+code\+\_\+generator()}{isbn\_crtl\_code\_generator()}}
-{\footnotesize\ttfamily char isbn\+\_\+crtl\+\_\+code\+\_\+generator (\begin{DoxyParamCaption}\item[{char}]{isbn\+\_\+code\+\_\+str\mbox{[}$\,$\mbox{]},  }\item[{int}]{isbn\+\_\+code\+\_\+standard }\end{DoxyParamCaption})}
+\hypertarget{_i_s_b_n__code__generator_8h_a1c0a2563da29f5a803bfe336e7aceab5}{\index{I\-S\-B\-N\-\_\-code\-\_\-generator.\-h@{I\-S\-B\-N\-\_\-code\-\_\-generator.\-h}!isbn\-\_\-crtl\-\_\-code\-\_\-generator@{isbn\-\_\-crtl\-\_\-code\-\_\-generator}}
+\index{isbn\-\_\-crtl\-\_\-code\-\_\-generator@{isbn\-\_\-crtl\-\_\-code\-\_\-generator}!ISBN_code_generator.h@{I\-S\-B\-N\-\_\-code\-\_\-generator.\-h}}
+\subsubsection[{isbn\-\_\-crtl\-\_\-code\-\_\-generator}]{\setlength{\rightskip}{0pt plus 5cm}char isbn\-\_\-crtl\-\_\-code\-\_\-generator (
+\begin{DoxyParamCaption}
+\item[{char}]{isbn\-\_\-code\-\_\-str\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{isbn\-\_\-code\-\_\-standard}
+\end{DoxyParamCaption}
+)}}\label{_i_s_b_n__code__generator_8h_a1c0a2563da29f5a803bfe336e7aceab5}
+Calcola il carattere di controllo di un codice I\-S\-B\-N \begin{DoxyPrecond}{Precondition}
+isbn\-\_\-code\-\_\-standard assume valore 10 o 13 
 
-Calcola il carattere di controllo di un codice I\+S\+BN \begin{DoxyPrecond}{Precondition}
-isbn\+\_\+code\+\_\+standard assume valore 10 o 13 
+isbn\-\_\-code\-\_\-str ha lunghezza pari a isbn\-\_\-code\-\_\-standard-\/1 
 
-isbn\+\_\+code\+\_\+str ha lunghezza pari a isbn\+\_\+code\+\_\+standard-\/1 
-
-isbn\+\_\+code\+\_\+str contiene solo caratteri decimali 
+isbn\-\_\-code\-\_\-str contiene solo caratteri decimali 
 \end{DoxyPrecond}
 \begin{DoxyPostcond}{Postcondition}
-il carattere restituito e\textquotesingle{} un cifra o una X 
+il carattere restituito e' un cifra o una X 
 
-il codice completo I\+S\+BN supera la verifica 
+il codice completo I\-S\-B\-N supera la verifica 
 \end{DoxyPostcond}
 
 \begin{DoxyParams}{Parameters}
-{\em isbn\+\_\+code\+\_\+str} & \\
+{\em isbn\-\_\-code\-\_\-str} & \\
 \hline
-{\em isbn\+\_\+code\+\_\+standard} & \\
+{\em isbn\-\_\-code\-\_\-standard} & \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -42,5 +45,5 @@ il codice completo I\+S\+BN supera la verifica
 \end{DoxyReturn}
 
 
-Definition at line 82 of file I\+S\+B\+N\+\_\+code\+\_\+generator.\+c.
+Definition at line 92 of file I\-S\-B\-N\-\_\-code\-\_\-generator.\-c.
 

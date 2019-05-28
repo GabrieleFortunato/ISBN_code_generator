@@ -1,4 +1,4 @@
-/*+
+/*
  * ISBN_code_generator.c
  *
  *  Created on: 01 mag 2018
@@ -36,20 +36,16 @@ static int get_res_thirteen(int sum){
 	return (rest == ZERO) ? ZERO : STD_10 - rest;
 }
 
-static bool verify_thirteen(char* isbn, int res){
+static int get_res_for_verify_thirteen(int res, char* isbn) {
 	for (int i = ZERO; i < strlen(isbn); i++)
 		res += ((i % TWO) == ZERO) ?
 				(isbn[i] - ASCII) : THREE * (isbn[i] - ASCII);
-	return (res % STD_10) == ZERO;
+	return res;
 }
 
-static char isbn_thirteen(char* isbn){
-	int sum = get_sum_thirteen(isbn);
-	int res = get_res_thirteen(sum);
-	char result = res + ASCII;
-	assert(verify_thirteen(isbn,res));
-	assert(isdigit(result));
-	return result;
+static bool verify_thirteen(char* isbn, int res){
+	res = get_res_for_verify_thirteen(res, isbn);
+	return (res % STD_10) == ZERO;
 }
 
 static int get_sum_ten(char* isbn){
@@ -64,10 +60,24 @@ static int get_res_ten(int sum){
 	return (rest == ZERO) ? ZERO : ELEVEN - rest;
 }
 
-static bool verify_ten(char* isbn, int res){
+static int get_res_for_verify_ten(int res, char* isbn) {
 	for (int i = ZERO; i < strlen(isbn); i++)
 		res += (STD_10 - i) * (isbn[i] - ASCII);
+	return res;
+}
+
+static bool verify_ten(char* isbn, int res){
+	res = get_res_for_verify_ten(res, isbn);
 	return (res % ELEVEN) == ZERO;
+}
+
+static char isbn_thirteen(char* isbn){
+	int sum = get_sum_thirteen(isbn);
+	int res = get_res_thirteen(sum);
+	char result = res + ASCII;
+	assert(verify_thirteen(isbn, res));
+	assert(isdigit(result));
+	return result;
 }
 
 static char isbn_ten(char* isbn){
@@ -80,9 +90,9 @@ static char isbn_ten(char* isbn){
 }
 
 char isbn_crtl_code_generator(char isbn_code_str[], int isbn_code_standard){
-	assert(isbn_code_standard==STD_10 || isbn_code_standard==STD_13);
-	assert(strlen(isbn_code_str));
-	assert(is_valid_isbn(isbn_code_str));
-	return (isbn_code_standard == STD_10) ?
-			isbn_ten(isbn_code_str) : isbn_thirteen(isbn_code_str);
+  	assert(isbn_code_standard == STD_10 || isbn_code_standard == STD_13);
+  	assert(strlen(isbn_code_str));
+  	assert(is_valid_isbn(isbn_code_str));
+  	return (isbn_code_standard == STD_10) ?
+  			isbn_ten(isbn_code_str) : isbn_thirteen(isbn_code_str);
 }
